@@ -24,20 +24,21 @@ filesystem:
 
 run: WordCount1.jar
 	-rm -rf output
+	-hdfs dfs -rm -r output
 	hadoop jar WordCount1.jar WordCount1 input output
-
 
 ##
 ## You may need to change the path for this depending
 ## on your Hadoop / java setup
 ##
 HADOOP_V=3.3.6
-STREAM_JAR = /usr/local/hadoop-$(HADOOP_V)/share/hadoop/tools/lib/hadoop-streaming-$(HADOOP_V).jar
+STREAM_JAR = /opt/hadoop-$(HADOOP_V)/share/hadoop/tools/lib/hadoop-streaming-$(HADOOP_V).jar
 
 stream:
 	-rm -rf stream-output
+	-hdfs dfs -rm -r stream-output
 	hadoop jar $(STREAM_JAR) \
-	-mapper Mapper.py \
-	-reducer Reducer.py \
-	-file Mapper.py -file Reducer.py \
+	-mapper URLMapper.py \
+	-reducer URLReducer.py \
+	-file URLMapper.py -file URLReducer.py \
 	-input input -output stream-output

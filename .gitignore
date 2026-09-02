@@ -1,0 +1,9 @@
+# Build artifacts
+*.jar
+*.class
+
+# MapReduce / streaming output directories
+output/
+urlcount-output/
+stream-output/
+_input/
